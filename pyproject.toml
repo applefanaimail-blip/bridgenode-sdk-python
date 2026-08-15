@@ -1,0 +1,52 @@
+[project]
+name = "bridgenode-llm"
+version = "0.2.9"
+description = "BridgeNode LLM client — AI inference with x402 payment on Solana USDC. No API keys, no registration."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT-0"
+license-files = ["LICENSE"]
+authors = [
+    { name = "BridgeNode", email = "eli.BNx@proton.me" },
+]
+keywords = ["x402", "solana", "usdc", "ai", "llm", "mcp", "agents", "payment", "bridgenode", "openai-compatible", "chat", "inference", "micropayments"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+dependencies = [
+    "x402[svm]>=2.18.0",
+    "x402[extensions]>=2.18.0",  # client.py imports x402.extensions.sign_in_with_x — clean install fails without it
+    "solana>=0.36.0,<0.40",  # solana 0.40.x removed solana.rpc.api — x402 imports it (broken combo)
+    "httpx>=0.28.1",
+    "python-dotenv>=1.2.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[project.urls]
+Homepage = "https://bridgenode.cc"
+Repository = "https://github.com/applefanaimail-blip/bridgenode-sdk-python"
+Documentation = "https://bridgenode.cc/llms.txt"
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["bridgenode_llm*"]
+
+[tool.setuptools.package-data]
+bridgenode_llm = ["py.typed"]
